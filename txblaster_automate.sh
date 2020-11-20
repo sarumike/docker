@@ -1,19 +1,19 @@
 #!/bin/bash
 
-#define conf file 
-config=~/RegTests/Data/txbtests/regtest.conf
+#define conf file - name and location of bsv conf file
+config=~/.bitcoin/bitcoin.conf
 
-#define regtest folder
-regtest=~/RegTests/Data/txbtests/output
+#define regtest folder - location of the regtest folder
+regtest=~/.bitcoin
 
-#define output folder to hold txns generated
-output=~/RegTests/Data/txbtests/output
+#define output folder to hold txns generated - shared container folder mapping
+output=/root/sv
 
-#define private keys location
-keys=~/RegTests/Data/524K_privateKeysWithPublic.txt
+#define private keys location - location in txblaster docker container
+keys=/TxBlaster6/524K_privateKeysWithPublic.txt
 
 #define bsv binaries location
-bsv=~/bitcoin-sv-1.0.5_difficulty/src
+bsv=~/bitcoin-sv-1.0.4/src
 
 #set variables for blocks and coins to send
 blocks=20000
@@ -77,7 +77,10 @@ echo "raw txn is " $rawtxn
 
 echo "Step 9: create json file for txblaster"
 
-echo "{" >> generate.json
+echo "remove any existing generate.json file"
+rm generate.json
+
+echo "{" > generate.json
 echo "\""networkType\"": \""RegTest\"", " >> generate.json
 echo "\""savePathRoot\"": \""$output\""," >> generate.json
 echo "\""fundingPrivateKeyWIF\"": \""$dumpkey\"", " >> generate.json
@@ -110,6 +113,12 @@ echo "}" >> generate.json
 
 echo ""
 echo "Finished!!!!"
+
+
+echo "copy generate.json file into docker container"
+container_name=$(sudo docker ps --format "{{.Names}}")
+
+sudo docker cp generate.json $container_name:/TxBlaster6/
 
 
 
