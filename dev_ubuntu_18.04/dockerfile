@@ -1,75 +1,21 @@
 FROM ubuntu:18.04
-MAINTAINER Chris Gibson
+MAINTAINER Mike Jenner
 
 RUN apt update && apt install --yes \
 	build-essential	\
     vim \
-    git \
-    subversion \
-    clang \
-    clang-format \
-    clang-tidy \
-    cmake \
     python3 \
-    tmux \
-    exuberant-ctags \
-    cscope \
-    gdb \
-    valgrind \
-    lldb \
-    iproute2 \
     nmap \    
     python-pip \
-#    linux-tools-$(uname -r) \
- #   linux-headers-$(uname -r) \
     htop 
 
 
 RUN apt upgrade --yes
 
-RUN git clone https://github.com/chrisgibson01/git.git /root/git.git
-RUN ln -s /root/git.git/.gitconfig /root/.gitconfig
-RUN ln -s /root/git.git/.gitignore /root/.gitignore
-
-RUN git clone https://github.com/chrisgibson01/vim.git /root/vim.git
-RUN ln -s /root/vim.git/.vimrc /root/.vimrc
-
-RUN git clone https://github.com/chrisgibson01/clang-format.git /root/clang-format.git
-RUN ln -s /root/clang-format.git/.clang-format /root/.clang-format
-
-RUN git clone https://github.com/chrisgibson01/clang-tidy.git /root/clang-tidy.git
-RUN ln -s /root/clang-tidy.git/.clang-tidy /root/.clang-tidy
-
-RUN git clone https://github.com/chrisgibson01/tmux.git /root/tmux.git
-RUN ln -s /root/tmux.git/.tmux.conf /root/.tmux.conf
-
-RUN git clone https://github.com/chrisgibson01/wireshark.git /root/wireshark.git
 
 RUN echo "set -o vi" >> /root/.bashrc
 RUN echo "source .bashrc" >> /root/.bash_profile
 
-RUN git clone https://github.com/chrisgibson01/gdb.git /root/gdb.git
-RUN ln -s /root/gdb.git/.gdbinit /root/.gdbinit
-
-#RUN svn checkout svn://gcc.gnu.org/svn/gcc/trunk/libstdc++-v3/python /root/gdb_printers/python
-
-RUN git clone https://github.com/google/benchmark.git /root/benchmark
-RUN git clone https://github.com/google/googletest.git /root/benchmark/googletest
-RUN mkdir /root/benchmark/build && cd /root/benchmark/build
-
-RUN pip install sphinx
-
-#RUN cmake /root/benchmark/
-#RUN cmake --build .
-
-#RUN git clone https://github.com/google/benchmark.git
-#RUN git clone https://github.com/google/googletest.git benchmark/googletest 
-#RUN mkdir build && cd build
-#RUN cmake ../benchmark
-#RUN make
-
-
-#EXPOSE 8332 18332 18444 9988
 
 # following copied in for txblaster
 
