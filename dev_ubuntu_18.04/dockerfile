@@ -25,7 +25,7 @@ RUN apt update && apt install -y \
     libcrypto++6 \
     libboost-all-dev
 
-RUN curl https://rea.crea.si/download/nchain/gateway/TxBlaster6_2.zip -O
+RUN curl https://rea.crea.si/download/nchain/gateway/TxBlaster6_2.zip -k -O
 
 RUN unzip TxBlaster6_2.zip
 

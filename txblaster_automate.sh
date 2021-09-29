@@ -16,8 +16,8 @@ keys=/TxBlaster6/524K_privateKeysWithPublic.txt
 bsv=~/bitcoin-sv-1.0.4/src
 
 #set variables for blocks and coins to send
-blocks=20000
-coins=14949
+blocks=1000
+coins=500
 
 
 echo "############ read values from .conf file ###################"

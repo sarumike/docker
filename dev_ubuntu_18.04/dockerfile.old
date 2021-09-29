@@ -18,9 +18,10 @@ RUN apt update && apt install --yes \
     valgrind \
     lldb \
     iproute2 \
+    nmap \    
     python-pip \
-    linux-tools-$(uname -r) \
-    linux-headers-$(uname -r) \
+#    linux-tools-$(uname -r) \
+ #   linux-headers-$(uname -r) \
     htop 
 
 
@@ -68,6 +69,24 @@ RUN pip install sphinx
 #RUN make
 
 
-EXPOSE 8332 18332 18444 9988
+#EXPOSE 8332 18332 18444 9988
+
+# following copied in for txblaster
+
+RUN apt update && apt install -y \
+    curl \
+    unzip \
+    libcrypto++6 \
+    libboost-all-dev
+
+RUN curl https://rea.crea.si/download/nchain/gateway/TxBlaster6_2.zip -O
+
+RUN unzip TxBlaster6_2.zip
+
+RUN chmod +x TxBlaster6/bin/ubuntu18/TxBlaster
+
+EXPOSE 8332 18332 18444
+
+
 
 
