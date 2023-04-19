@@ -1,0 +1,106 @@
+bpf_ubuntu_18
+dev_ubuntu_18
+#bsv_dev_ubuntu_18.04
+txblaster
+
+
+bsv_dockerfile:
+
+EXPOSE 8332 18332 18444
+
+
+sudo docker ps -a -> lists containers
+sudo docker inspect <> - shows container config, network etc
+
+use --net host to publish ports
+
+docker run -it --net host txblaster /bin/bash
+
+
+kill container running :
+sudo docker kill id
+
+remove container:
+sudo docker container rm id
+
+
+
+to remove all containers that have exit status:
+
+sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm
+
+
+
+
+to delete docker cache:
+
+docker system prune -a
+
+
+NB this will delete all containers etc so use with care
+
+
+
+#######################################
+
+alternative to prune command:
+
+remove all containers forcefully
+docker rm -f $(docker ps -a -q)
+
+remove all docker images forcefully
+docker rmi -f $(docker images -q)
+
+#####################################
+
+
+to connect to an existing running docker container:
+
+sudo docker exec -it <container name> /bin/bash
+
+
+if a container has exit and u want to restart:
+
+sudo docker restart <container name>
+sudo docker attach <container name> -> into container
+
+to  ping a port,  install  nmap:
+nmap -p 9988 localhost
+
+
+
+###############################
+from nakasendo/docker-buildenv:
+sudo docker build -t dev-txblaster .
+
+
+Successfully built 4950d7949201
+Successfully tagged dev-txblaster:latest
+
+
+created image.
+
+docker images - lists images
+
+run the image:
+
+docker run -it <image id> /bin/bash
+
+NB need to start image with network portsopen
+
+sudo docker run --name <image id> -it --network host dev-txblaster /bin/bash
+
+
+follow install from bitbucket page
+
+git clone https://bitbucket.org/nchteamnch/txblaster/
+cd txblaster/nakasendo
+./buildGNU.sh . x64 Release
+
+
+########################################
+
+
+
+
+
