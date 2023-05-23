@@ -23,6 +23,10 @@ sudo docker kill id
 remove container:
 sudo docker container rm id
 
+stop all running containers:
+
+docker stop $(docker ps -a -q)
+
 
 
 to remove all containers that have exit status:
